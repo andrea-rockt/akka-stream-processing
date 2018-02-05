@@ -1,0 +1,28 @@
+plugins {
+    id 'scala'
+}
+
+
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.4'
+
+    compile group: 'com.typesafe.akka', name: 'akka-testkit_2.12', version: '2.5.11'
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.12', version: '2.5.11'
+    compile group: 'com.typesafe.akka', name: 'akka-slf4j_2.12', version: '2.5.11'
+    compile group: 'com.typesafe.akka', name: 'akka-stream_2.12', version: '2.5.11'
+    compile group: 'com.typesafe.akka', name: 'akka-http_2.12', version: '10.1.0'
+    compile group: 'com.typesafe.akka', name: 'akka-http-testkit_2.12', version: '10.1.0'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.scalatest:scalatest_2.12:3.0.4'
+
+    // Need scala-xml at test runtime
+    testRuntime 'org.scala-lang.modules:scala-xml_2.12:1.0.6'
+}
+
+repositories {
+    jcenter()
+}
