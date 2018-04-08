@@ -1,8 +1,13 @@
 plugins {
-    id 'scala'
+    id 'com.palantir.docker' version '0.19.2'
 }
 
+apply plugin: 'scala'
+apply plugin: 'application'
 
+group = 'io.github.orchestrate'
+version = '0.0.1-SNAPSHOT'
+mainClassName = "io.github.orchestrate.Runner"
 
 dependencies {
     compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.4'
@@ -13,6 +18,8 @@ dependencies {
     compile group: 'com.typesafe.akka', name: 'akka-stream_2.12', version: '2.5.11'
     compile group: 'com.typesafe.akka', name: 'akka-http_2.12', version: '10.1.0'
     compile group: 'com.typesafe.akka', name: 'akka-http-testkit_2.12', version: '10.1.0'
+    compile group: 'com.typesafe.akka', name: 'akka-cluster_2.12', version: '2.5.11'
+
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
 
@@ -25,4 +32,14 @@ dependencies {
 
 repositories {
     jcenter()
+}
+
+docker {
+    name "andrea-rockt/orchestrate:${project['version']}"
+    tags 'latest'
+    dockerfile file('Dockerfile')
+    buildArgs([VERSION: project['version']])
+    files tasks.distTar.outputs
+    pull true
+    noCache true
 }
